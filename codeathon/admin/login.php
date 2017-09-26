@@ -1,3 +1,6 @@
+<?php 
+	session_start();
+?>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -54,14 +57,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					$query = "SELECT * FROM admin WHERE username = '$username' AND password = '$password'";
 					
 					if(mysqli_num_rows(mysqli_query($conn, $query))){
-						header('Location: index.html');
+						$_SESSION['id'] = session_id();
+						header('Location: index.php');
 					}else{
 						echo "<h6 style=color:red;text-align:center;font-size:16px;margin-top:8px;font-weight:normal;>Login Failed , Invalid Credentials</h6>";
 					}
 				}
-			
-			?>
-			
+			?>		
 			
 			<ul class="new">
 				<li class="new_left"><p>

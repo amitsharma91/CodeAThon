@@ -1,3 +1,8 @@
+<?php 
+	session_start();
+	if(isset($_SESSION['id'])){
+?>		
+	
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -58,43 +63,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="index.html"><i
+						<li><a href="index.php"><i
 								class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a></li>
-						<li><a href="#"><i class="fa fa-laptop nav_icon"></i>Layouts<span
-								class="fa arrow"></span></a>
+						
+						<li><a href="#"><i class="fa fa-indent nav_icon"></i>Users<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="grids.html">Grid System</a></li>
+								<li><a href="viewInactiveUsers.php">Inactive User</a></li>
 							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-indent nav_icon"></i>Menu
-								Levels<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="graphs.html">Graphs</a></li>
-								<li><a href="typography.html">Typography</a></li>
-							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-envelope nav_icon"></i>Mailbox<span
-								class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="inbox.html">Inbox</a></li>
-								<li><a href="compose.html">Compose email</a></li>
-							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="widgets.html"><i
-								class="fa fa-flask nav_icon"></i>Widgets</a></li>
+						
 						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i>Questions<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="manageQuestions.php">Manage Questions</a></li>
 								<li><a href="manageViewQuestions.php">View Questions</a></li>
 							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-table nav_icon"></i>Tables<span
+						
+						<li><a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Account<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="basic_tables.html">Basic Tables</a></li>
-							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Css<span
-								class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="media.html">Media</a></li>
-								<li><a href="login.html">Login</a></li>
+								<li><a href="#">Change Password</a></li>
+								<li><a href="logout.php" onclick="return confirm('Are you sure you want to LOGOUT?')">Logout</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>
 				</div>
@@ -102,21 +90,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<!-- /.navbar-static-side -->
 		</nav>
-
-
-
 		<div id="page-wrapper">
 			<div class="graphs">
 				<div class="col_3">
-
-
 					<div class="clearfix"></div>
 				</div>
-
-
-
-
-
+				<?php //echo $_SESSION['id']."<br/>".session_id();?>
 				<div class="content_bottom">
 					<div class="copy">
 						<img alt="" style="max-width: 100%; height: auto;"
@@ -138,3 +117,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<?php 
+	}else{
+?>
+	<script>
+		alert("Please Login as ADMIN");
+	</script>
+<?php
+	header("Refresh:0; url=login.php");
+	}
+?>

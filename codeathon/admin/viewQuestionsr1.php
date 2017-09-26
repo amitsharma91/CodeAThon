@@ -1,11 +1,24 @@
 <?php 
 	session_start();
+	if(isset($_SESSION['id'])){
+	
 	require "conn.php";
 	
 	$query = "SELECT * FROM question_mcq";
 	
 	$result = mysqli_query($conn, $query);
 	$n = 1;
+	
+	if(isset($_GET['delete'])){
+	if(mysqli_query($conn, "DELETE FROM question_mcq WHERE id=".$_GET['delete'])){
+		?>
+			   			<script>
+			   				alert("Record Sucessfully Deleted...");
+			   			</script>
+			<?php  			
+			header("Refresh:0; url=viewQuestionsr1.php");
+		}
+	}
 ?>
 
 
@@ -18,7 +31,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Modern an Admin Panel Category Flat Bootstarp Resposive Website Template | Basic_tables :: w3layouts</title>
+<title>Code A Thon</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
@@ -117,73 +130,28 @@ window.onclick = function(event) {
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-laptop nav_icon"></i>Layouts<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="grids.html">Grid System</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-indent nav_icon"></i>Menu Levels<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="graphs.html">Graphs</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-envelope nav_icon"></i>Mailbox<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="inbox.html">Inbox</a>
-                                </li>
-                                <li>
-                                    <a href="compose.html">Compose email</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="widgets.html"><i class="fa fa-flask nav_icon"></i>Widgets</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-check-square-o nav_icon"></i>Questions<span
+						<li><a href="index.php"><i
+								class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a></li>
+						
+						<li><a href="#"><i class="fa fa-indent nav_icon"></i>Users<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="viewInactiveUsers.php">Inactive User</a></li>
+							</ul> <!-- /.nav-second-level --></li>
+						
+						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i>Questions<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="manageQuestions.php">Manage Questions</a></li>
 								<li><a href="manageViewQuestions.php">View Questions</a></li>
 							</ul> <!-- /.nav-second-level --></li>
-                        <li>
-                            <a href="#"><i class="fa fa-table nav_icon"></i>Tables<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="basic_tables.html">Basic Tables</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Css<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="media.html">Media</a>
-                                </li>
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    </ul>
+						
+						<li><a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Account<span
+								class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="#">Change Password</a></li>
+								<li><a href="logout.php" onclick="return confirm('Are you sure you want to LOGOUT?')">Logout</a></li>
+							</ul> <!-- /.nav-second-level --></li>
+					</ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
@@ -218,6 +186,7 @@ window.onclick = function(event) {
             <th style="color: #ffffff">Option 3</th>
             <th style="color: #ffffff">Option 4</th>
             <th style="color: #ffffff">Answer</th>
+            <th style="color: #ffffff">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -239,6 +208,7 @@ window.onclick = function(event) {
 		            <td><?php echo $opt3;?></td>
 		            <td><?php echo $opt4;?></td>
 		            <td><?php echo $answer;?></td>
+		            <td><a href="viewQuestionsr1.php?delete=<?php echo $row['id']?>" onclick="return confirm('Are you sure you want to delete?')"><img src="images/delete.png" alt="" width="18px" height="18px"/></a></td>
 	          	</tr>
         <?php 		
         	}
@@ -266,3 +236,13 @@ window.onclick = function(event) {
 <script src="js/custom.js"></script>
 </body>
 </html>
+<?php 
+	}else{
+?>
+	<script>
+		alert("Please Login as ADMIN");
+	</script>
+<?php
+	header("Refresh:0; url=login.php");
+	}
+?>
