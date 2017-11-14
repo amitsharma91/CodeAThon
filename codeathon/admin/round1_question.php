@@ -2,12 +2,6 @@
 	session_start();
 	if(isset($_SESSION['id'])){
 ?>	
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -26,9 +20,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- jQuery -->
 <script src="js/jquery.min.js"></script>
 <!----webfonts--->
-<link
+<!-- <link
 	href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'
-	rel='stylesheet' type='text/css'>
+	rel='stylesheet' type='text/css'> -->
 <!---//webfonts--->
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
@@ -86,6 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="#"><i class="fa fa-indent nav_icon"></i>Users<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="viewInactiveUsers.php">Inactive User</a></li>
+								<li><a href="exam_result.php">Exam Result</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 						
 						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i>Questions<span
@@ -98,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Account<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="#">Change Password</a></li>
+								<li><a href="changePassword.php">Change Password</a></li>
 								<li><a href="logout.php" onclick="return confirm('Are you sure you want to LOGOUT?')">Logout</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>
@@ -117,12 +112,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="form-group">
 									<label for="txtarea1" class="col-sm-2 control-label">Question</label>
 									<div class="col-sm-8">
-										<textarea name="question" id="txtarea1" style="width: 100%;height: 150%" required="required" maxlength="60"
-											placeholder="Enter Question here..." class="form-control1" onkeyup="textCounter(this,'counter',60);" id="message"></textarea>
+										<textarea name="question" id="txtarea1" style="width: 100%;height: 150%" required="required" maxlength="600"
+											placeholder="Enter Question here..." class="form-control1" onkeyup="textCounter(this,'counter',600);" id="message"></textarea>
 									</div>
 									<div class="col-sm-2">
-										<p class="help-block">Maximum 60 Characters are Allowed</p>
-										<p class="help-block">Characters Remaining: <input disabled  maxlength="3" size="3" value="60" id="counter" style="border:0;background: transparent;"></p>
+										<p class="help-block">Maximum 600 Characters are Allowed</p>
+										<p class="help-block">Characters Remaining: <input disabled  maxlength="3" size="3" value="600" id="counter" style="border:0;background: transparent;"></p>
 									</div>
 								</div>
 
@@ -130,7 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<label for="focusedinput" class="col-sm-2 control-label">Option
 										1</label>
 									<div class="col-sm-8">
-										<input type="text" name="opt1" class="form-control1" required="required" maxlength="40"
+										<input type="text" name="opt1" class="form-control1" required="required" maxlength="100"
 											id="focusedinput" placeholder="Enter Option 1">
 									</div>
 								</div>
@@ -139,7 +134,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<label for="focusedinput" class="col-sm-2 control-label">Option
 										2</label>
 									<div class="col-sm-8">
-										<input type="text" name="opt2" class="form-control1" required="required" maxlength="40"
+										<input type="text" name="opt2" class="form-control1" required="required" maxlength="100"
 											id="focusedinput" placeholder="Enter Option 2">
 									</div>
 								</div>
@@ -148,7 +143,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<label for="focusedinput" class="col-sm-2 control-label">Option
 										3</label>
 									<div class="col-sm-8">
-										<input type="text" name="opt3" class="form-control1" required="required" maxlength="40"
+										<input type="text" name="opt3" class="form-control1" required="required" maxlength="100"
 											id="focusedinput" placeholder="Enter Option 3">
 									</div>
 								</div>
@@ -157,7 +152,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<label for="focusedinput" class="col-sm-2 control-label">Option
 										4</label>
 									<div class="col-sm-8">
-										<input type="text" name="opt4" class="form-control1" required="required" maxlength="40"
+										<input type="text" name="opt4" class="form-control1" required="required" maxlength="100"
 											id="focusedinput" placeholder="Enter Option 4">
 									</div>
 								</div>
@@ -190,7 +185,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 					require "conn.php";
 					
-					$question = $_POST ['question'];
+					$question = mysqli_real_escape_string($conn,$_POST ['question']);
 					$option1 = $_POST ['opt1'];
 					$option2 = $_POST ['opt2'];
 					$option3 = $_POST ['opt3'];

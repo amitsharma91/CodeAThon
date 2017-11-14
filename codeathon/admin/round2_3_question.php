@@ -7,12 +7,6 @@
 	$round = "round".$type;
 ?>
 
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -31,9 +25,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- jQuery -->
 <script src="js/jquery.min.js"></script>
 <!----webfonts--->
-<link
+<!-- <link
 	href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'
-	rel='stylesheet' type='text/css'>
+	rel='stylesheet' type='text/css'> -->
 <!---//webfonts--->
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
@@ -49,6 +43,35 @@ function textCounter(field,field2,maxlimit)
  }
 }
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$("textarea").keydown(function(e) {
+		    if(e.keyCode === 9) { // tab was pressed
+		        // get caret position/selection
+		        var start = this.selectionStart;
+		            end = this.selectionEnd;
+
+		        var $this = $(this);
+
+		        // set textarea value to: text before caret + tab + text after caret
+		        $this.val($this.val().substring(0, start)
+		                    + "\t"
+		                    + $this.val().substring(end));
+
+		        // put caret at right position again
+		        this.selectionStart = this.selectionEnd = start + 1;
+
+		        // prevent the focus lose
+		        return false;
+		    }
+		});
+
+	});
+</script>
+
+
 </head>
 <body>
 	<div id="wrapper">
@@ -74,6 +97,7 @@ function textCounter(field,field2,maxlimit)
 						<li><a href="#"><i class="fa fa-indent nav_icon"></i>Users<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="viewInactiveUsers.php">Inactive User</a></li>
+								<li><a href="exam_result.php">Exam Result</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 						
 						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i>Questions<span
@@ -86,7 +110,7 @@ function textCounter(field,field2,maxlimit)
 						<li><a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Account<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="#">Change Password</a></li>
+								<li><a href="changePassword.php">Change Password</a></li>
 								<li><a href="logout.php" onclick="return confirm('Are you sure you want to LOGOUT?')">Logout</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>
@@ -105,12 +129,12 @@ function textCounter(field,field2,maxlimit)
 								<div class="form-group">
 									<label for="txtarea1" class="col-sm-2 control-label">Question</label>
 									<div class="col-sm-8">
-										<textarea name="question" style="width: 100%;height: 150%" required="required" maxlength="80"
-											placeholder="Enter Question here..." class="form-control1" onkeyup="textCounter(this,'counter',80);" id="message"></textarea>
+										<textarea name="question" style="width: 100%;height: 350px" required="required" maxlength="600"
+											placeholder="Enter Question here..." class="form-control1" onkeyup="textCounter(this,'counter',600);" id="message"></textarea>
 									</div>
 									<div class="col-sm-2">
-										<p class="help-block">Maximum 80 Characters are Allowed</p>
-										<p class="help-block">Characters Remaining: <input disabled  maxlength="3" size="3" value="80" id="counter" style="border:0;background: transparent;"></p>
+										<p class="help-block">Maximum 600 Characters are Allowed</p>
+										<p class="help-block">Characters Remaining: <input disabled  maxlength="3" size="3" value="600" id="counter" style="border:0;background: transparent;"></p>
 									</div>
 								</div>
 							
@@ -126,7 +150,7 @@ function textCounter(field,field2,maxlimit)
 				if(isset($_POST['round2'])){
 					require "conn.php";
 					
-					$question = $_POST ['question'];
+					$question = mysqli_real_escape_string($conn, $_POST ['question']);
 					
 					$query = "INSERT INTO question(question,round_type) VALUES('$question',2)";
 					
@@ -148,7 +172,7 @@ function textCounter(field,field2,maxlimit)
 				else if(isset($_POST['round3'])){
 					require "conn.php";
 						
-					$question = $_POST ['question'];
+					$question = mysqli_real_escape_string($conn, $_POST ['question']);
 						
 					$query = "INSERT INTO question(question,round_type) VALUES('$question',3)";
 						

@@ -44,7 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- jQuery -->
 <script src="js/jquery.min.js"></script>
 <!----webfonts--->
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<!-- <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'> -->
 <!---//webfonts--->  
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
@@ -88,6 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="#"><i class="fa fa-indent nav_icon"></i>Users<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="viewInactiveUsers.php">Inactive User</a></li>
+								<li><a href="exam_result.php">Exam Result</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 						
 						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i>Questions<span
@@ -100,7 +101,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Account<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="#">Change Password</a></li>
+								<li><a href="changePassword.php">Change Password</a></li>
 								<li><a href="logout.php" onclick="return confirm('Are you sure you want to LOGOUT?')">Logout</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>
