@@ -7,3 +7,4 @@ Description:
 2) It contains 2 separate portals for Candidate and Administrator.
 3) Admin can activate user account, Manage Questions, and update Result.
 4) User appearing for test have to go through: MCQ round, Programming round & Identifying Output round.
+5) Dev C/C++ Compiler required for program compilation for Programming Round.
